@@ -1,0 +1,283 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #242222 !important;
+    font-family: "geometria";
+    /* font-family: "associate"; */
+}
+
+@font-face {
+    font-family: "bristone";
+    src: url(/bristone/Bristone.otf);
+}
+
+@font-face {
+    font-family: "geometria";
+    src: url(/geometria-cufonfonts/Geometria.ttf);
+}
+
+@font-face {
+    font-family: "associate";
+    src: url(/associate-sans-cufonfonts/AssociateSansRegular.otf);
+}
+
+.nft-bid {
+    display: flex;
+    justify-content: space-between;
+    margin: 69px;
+}
+.nft-detail{
+    width: 36%;
+}
+.nft-item {
+    height: 496px;
+    width: 100%;
+    border-radius: 12px;
+    background: #242222;
+    box-shadow: 12px 13px 31px #151414, -13px -9px 28px #333030;
+
+}
+
+.nft-item .item-sell img {
+    height: 450px;
+    width: 100%;
+    border-radius: 0px 0px 12px 12px;
+}
+.item-likes{
+    color: #817f7f;
+    font-size: 20px;
+}
+.item-likes span{
+    font-size: 15px;
+    line-height: 1px;
+}
+.nft-item .item-head {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.nft-item .nft-coin img {
+    height: 16px;
+}
+.nft-info{
+    /* border: 1px solid  ; */
+    width: 69%;
+    padding: 20px;
+}
+.about-user{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    height: 150px;
+    
+}
+.al-ab-user{
+    height: 150px;
+    line-height: 56px;
+    color: #817f7f;
+}
+.al-ab-user .us-name{
+    
+    font-size: 17px;
+    
+}
+.al-ab-user .us-id{
+color: white;
+font-size: 25px;
+}
+.al-ab-user .item-rate span{
+        margin: 0px 10px;
+}
+.al-ab-user .item-rate a{
+    text-decoration: none;
+    color: #7a31b6;
+}
+.other-nft{
+    color: white;
+    font-size: 25px;
+    height: 43px;
+    width: 195px;
+    border: 1px solid;
+   border-radius: 12px;
+}
+
+.bor{
+    border-right: 1px solid;
+    padding: 1px 10px 10px 10px;
+}
+.timeline{
+    background-color: #151414;
+    color: #817f7f;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 12px 12px 0px 0px ;
+}
+.timeline ion-icon{
+    font-size: 25px;
+}
+.nftsell{
+    height: 250px;
+    width: 100%;
+    margin-top: 46px;
+    background-color: #333030;
+    border-radius: 12px;
+}
+.nft-biding{
+    padding: 20px;
+    line-height: 40px;
+    color: #8d8d8d;
+}
+.nft-biding span{
+    margin: 0px 12px;
+}
+.nft-biding span ion-icon{
+font-size: 25px;
+background-color: #4d4d4d;
+border-radius: 50%;
+padding: 2px;
+}
+.nft-biding button{
+    width: 50%;
+    height: 50px;
+    border-radius: 12px;
+    border: none;
+    background-image: linear-gradient(to left, #9d31b8, #da2aab);
+    color: white;
+    font-size: 20px;
+}
+.nft-biding button:hover{
+    background-image: linear-gradient(to right, #9d31b8, #da2aab);
+    color: white;
+}
+.list-nft{
+    width: 100%;
+    height: 150px;
+    margin-top: 25px;
+    background-color: #333030;
+    color: white;
+    border-radius: 12px 12px 12px 12px;
+}
+.list-title{
+    display: flex;
+    justify-content: space-between;
+    padding: 13px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #817f7f;
+    background-color: #151414;
+    border-radius: 12px 12px 0px 0px ;
+    border-bottom:1px solid #333030;
+}
+.list-title ion-icon{
+    font-size: 25px;
+}
+.list-content a{
+    text-decoration: none;
+    color: #7a31b6;
+}
+.bg-c{
+    background-color: #151414; 
+    padding: 10px 20px;
+    border-bottom:1px solid #333030;
+}
+.pd-b{
+    padding: 3px 20px;
+}
+.nft-price{
+display: grid;
+grid-template-columns: auto auto auto auto;
+gap: 20px 0px ;
+/* padding: 13px; */
+}
+.bid-offers{
+    width: 100%;
+    height: 300px;
+    background-color: #333030;
+    border-radius: 12px 12px 12px 12px ;
+    /* overflow-y: scroll; */
+}
+.bid-offers .offer{
+    display: flex;
+    justify-content: space-between;
+    background-color: #151414;
+    padding: 13px;
+    margin-top: 25px;
+    border-radius: 12px 12px 0px 0px;
+    color: #817f7f;
+    font-size: 16px;
+    font-weight: 700;
+    border-bottom:1px solid #333030;
+}
+.bid-offers .offer ion-icon{
+    font-size: 25px;
+}
+.pufef{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    background-color: #151414; 
+    padding: 10px 20px;
+    border-bottom:1px solid #333030;
+    color: white;
+    
+}
+.offer-info{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    color: #817f7f;
+    padding: 10px 20px;
+}
+.offer-info p{
+    color: white;
+}
+.offer-info a{
+    color: #7a31b6;
+    text-decoration: none;
+}
+.item-detail{
+    margin-top: 20px;
+    width: 100%;
+    background-color: #333030;
+    height: 250px;
+    border-radius: 12px;
+}
+.dec-title{
+    background-color: #151414; 
+    padding: 10px 20px;
+    border-bottom:1px solid #333030;
+    color: white;
+    border-radius: 12px 12px 0px 0px ;
+}
+.sec-content{
+    padding: 20px;
+}
+.sec-content p{
+    padding: 10px;
+    color: white;
+    /* font-weight: 700; */
+}
+.sec-content a{
+    color: #7a31b6;
+    text-decoration: none;
+}
+.property{
+    width: 100%;
+    background-color: #333030;
+    height: 250px;
+    border-radius: 12px;
+
+}
+.property .prop-tit{
+    background-color: #151414; 
+    padding: 10px 20px;
+    border-bottom:1px solid #333030;
+    color: white;
+    border-radius: 12px 12px 0px 0px ;
+}
+

@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+<style type="text/css">
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap");
+
+ #main-nav {
+     margin: 10px auto;
+         min-height: 50px;
+     min-height: 50px;
+     flex-flow: row nowrap;
+     display: flex;
+     flex-direction: column;
+     flex-wrap: nowrap;
+     align-items: flex-start;
+     align-content: flex-start;
+     justify-content: space-around;
+}
+ #main-nav a.cart-button {
+     width: 44px;
+     min-height: 50px;
+     position: relative;
+     cursor: pointer;
+     display: flex;
+     flex-direction: column;
+     flex-wrap: nowrap;
+     align-items: center;
+     align-content: flex-start;
+     justify-content: space-around;
+}
+ #main-nav a.cart-button span.bag-icon {
+     width: 34px;
+     height: 40px;
+     display: block;
+     margin-bottom: 10px;
+     z-index: 1;
+     text-indent: -999px;
+     overflow: hidden;
+     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 40'%3E%3Cpath d='M33.1 10.2h-8V7.9C25 3.5 21.4 0 17 0c-4.4 0-8 3.5-8 7.9v2.3H1c-.5 0-.9.4-.9.9v24.4C0 38 2.1 40 4.6 40h24.7c2.6 0 4.6-2 4.6-4.5V11.1c.1-.5-.3-.9-.8-.9zM10.8 7.9c0-3.4 2.8-6.1 6.2-6.1 3.4 0 6.2 2.7 6.2 6.1v2.3H10.8V7.9zm21.3 27.6c0 1.5-1.2 2.7-2.8 2.7H4.6c-1.5 0-2.8-1.2-2.8-2.7V12H9v1.1c0 .5.4.9.9.9s.9-.4.9-.9V12h12.4v1.2c0 .5.4.9.9.9s.9-.4.9-.9V12h7.1v23.5z'/%3E%3C/svg%3E");
+     background: rgba(255, 255, 255, 0.6);
+     transition: all 0.5s linear 0s;
+}
+ #main-nav a.cart-button span.bag-count {
+     border-radius: 3px;
+     color: rgba(255, 255, 255, 0.9);
+     font-size: 16px;
+     font-weight: 600;
+     height: 28px;
+     width: 34px;
+     position: absolute;
+     top: 11px;
+     z-index: 0;
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     justify-content: center;
+     transition: all 0.5s linear 0s;
+}
+ #main-nav a.cart-button span.bag-label {
+     display: block;
+     color: rgba(255, 255, 255, 0.6);
+     font-size: 11px;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+     height: 20px;
+     /*width: 80px;*/
+     text-align: center;
+     transition: all 0.5s linear 0s;
+}
+ #main-nav a.cart-button:active span.bag-icon, #main-nav a.cart-button:hover span.bag-icon {
+     background: #fff;
+}
+ #main-nav a.cart-button:active span.bag-count, #main-nav a.cart-button:hover span.bag-count {
+     color: #fff;
+}
+ #main-nav a.cart-button:active span.bag-label, #main-nav a.cart-button:hover span.bag-label {
+     color: #fff;
+}
+ body.show-sidebar-cart {
+     overflow: hidden !important;
+     height: 100% !important;
+}
+ body.show-sidebar-cart #sidebar-cart {
+     right: 0;
+     visibility: visible;
+}
+ #sidebar-cart {
+     background: linear-gradient(183deg, rgba(26, 18, 57, 1) 70%, rgba(49, 21, 79, 1) 60%, rgba(29, 20, 63, 1) 10%);
+    color: #75757a;
+     color: #75757a;
+     padding: 15px 15px 0 15px;
+     position: fixed;
+     display: block;
+     width: 320px;
+     height: 100vh;
+     z-index: 2;
+     top: 0;
+     right: -340px;
+     box-shadow: -10px 0 15px rgba(0, 0, 0, 0.1);
+     transition: right 0.5s ease-in-out;
+}
+ #sidebar-cart a.close-button {
+     height: 16px;
+     width: 16px;
+     margin: 0 0 15px 0;
+     text-decoration: none;
+     position: absolute;
+     top: 20px;
+     left: 20px;
+     display: flex;
+}
+ #sidebar-cart a.close-button span.close-icon {
+     width: 16px;
+     height: 16px;
+     background: rgba(255, 255, 255, 0.3);
+     text-indent: -9999px;
+     overflow: hidden;
+     font-size: 0;
+     /*mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M30.3 32c-.5 0-.9-.2-1.2-.5L16 18.4 3 31.5c-.4.3-.8.5-1.3.5s-.9-.2-1.2-.5c-.7-.7-.7-1.8 0-2.4L13.6 16 .5 2.9C-.2 2.2-.2 1.2.5.5.8.2 1.2 0 1.7 0s.9.2 1.2.5l13.1 13 13-13c.7-.7 1.7-.7 2.4 0 .4.3.6.7.6 1.2s-.2.9-.5 1.2L18.4 16l13.1 13.1c.7.7.7 1.8 0 2.4-.3.3-.8.5-1.2.5z'/%3E%3C/svg%3E");*/
+     /*background: url(download.svg);*/
+     transition: all 0.5s linear;
+         background: url(close-button.png);
+    background-size: cover;
+}
+ #sidebar-cart a.close-button:active span.close-icon, #sidebar-cart a.close-button:hover span.close-icon {
+     background: #fff;
+}
+ #sidebar-cart h2 {
+     color: #fff;
+     font-family: Muli;
+     font-size: 16px;
+     font-weight: 600;
+     letter-spacing: 2px;
+     text-transform: uppercase;
+     line-height: 1;
+     margin: 5px 0 25px 0;
+     display: flex;
+     justify-content: center;
+}
+ #sidebar-cart h2 span.count {
+     color: #fff;
+     background: #4dc0e3;
+     padding: 8px;
+     margin-left: 6px;
+     position: relative;
+     top: -1px;
+     width: 18px;
+     height: 18px;
+     border-radius: 50px;
+     font-size: 12px;
+     letter-spacing: 0;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+ #sidebar-cart ul.products {
+     margin: 0;
+     padding: 0 0 15px 0;
+     list-style: none;
+     height: calc(100vh - 200px);
+     overflow-x: hidden;
+     overflow-y: auto;
+     display: block;
+     position: relative;
+     z-index: 0;
+}
+ #sidebar-cart ul.products:after {
+     /*background: linear-gradient(180deg, transparent, #354165);*/
+     height: 30px;
+     width: 300px;
+     z-index: 1;
+     content: "";
+     position: absolute;
+     right: 0;
+     bottom: 0;
+}
+ #sidebar-cart ul.products li.product {
+     margin: 0 0 10px 0;
+     padding: 0;
+     width: 100%;
+     min-height: 30px;
+     background: #dee2ee;
+     border-radius: 3px;
+     color: #98989b;
+     position: relative;
+     z-index: 1;
+     display: flex;
+     flex-flow: row nowrap;
+     transition: all 0.5s linear;
+}
+ #sidebar-cart ul.products li.product:active, #sidebar-cart ul.products li.product:hover {
+     background: #fff;
+}
+ #sidebar-cart ul.products li.product:active span.product-details h3, #sidebar-cart ul.products li.product:hover span.product-details h3 {
+     color: #56b8b6 !important;
+}
+ #sidebar-cart ul.products li.product:active img, #sidebar-cart ul.products li.product:hover img {
+     border-color: #d7d7de !important;
+}
+
+#sidebar-cart ul.products li.product a.product-link {
+    width: 100%;
+    color: #354165;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background: #574174;
+    border-radius: 0.5rem;
+    border-style: solid;
+    border-width: 2px;
+    border-image: linear-gradient(270deg, #c392e8,#719bd4 ,#80d17d,#7ecfa3) 1;
+}
+
+ #sidebar-cart ul.products li.product a.product-link span.product-image {
+     display: inline-block;
+     width: 75px;
+     height: 50px;
+     padding-right: 10px;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-image img {
+     width: 60px;
+     height: 50px;
+     border: 1px solid #d7d7de;
+     transition: all 0.5s linear;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details {
+     display: inline-block;
+     width: 100%;
+     min-height: 30px;
+     color: #75757a;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details h3 {
+     margin: 3px 25px 5px 0;
+     font-size: 13px;
+     font-weight: 500;
+     color: white;
+     transition: all 0.5s linear;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price {
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+     align-content: center;
+     align-items: center;
+     justify-content: space-between;
+     width: 100%;
+     position: relative;
+     z-index: 5px;
+     margin-top: 8px;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty, #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.price {
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty {
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+     align-content: center;
+     align-items: center;
+     justify-content: flex-start;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty button.minus-button, #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty button.plus-button {
+     width: 25px;
+     height: 24px;
+     border-radius: 3px;
+     border: 1px solid #cdcdd1;
+     background: #f0f0f9;
+     color: #75757a;
+     font-size: 18px;
+     text-align: center;
+     vertical-align: middle;
+     line-height: 20px;
+     transition: all 0.3s linear;
+     background: #1a1239;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty button.minus-button:active, #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty button.plus-button:active, #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty button.minus-button:hover, #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty button.plus-button:hover {
+     color: #fff;
+         background: #56b8b6;
+    border-color: #56b8b6;
+     cursor: pointer;
+     outline: none;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty button.minus-button:focus, #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty button.plus-button:focus {
+     outline: none;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty input.qty-input {
+     width: 24px;
+     height: 24px;
+     text-align: center;
+     border: 1px solid #cdcdd1;
+     border-radius: 3px;
+     margin: 0 2px;
+     transition: all 0.5s linear;
+     font-size: 13px;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty input.qty-input:active, #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty input.qty-input:hover {
+     border: 1px solid #4dc0e3;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty input.qty-input:focus {
+     outline: none;
+     border: 1px solid #4dc0e3;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty input.qty-input::-webkit-inner-spin-button, #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.qty input.qty-input::-webkit-outer-spin-button {
+     appearance: none;
+     margin: 0;
+}
+ #sidebar-cart ul.products li.product a.product-link span.product-details span.qty-price span.price {
+     color: #4dc0e3;
+     /*font-weight: 500;*/
+     font-size: 13px;
+     display: inline-flex;
+}
+ #sidebar-cart ul.products li.product a.remove-button {
+     height: 16px;
+     width: 16px;
+     margin: 10px 10px 0 0;
+     text-decoration: none;
+     position: absolute;
+     top: 2px;
+     right: 0;
+     z-index: 2;
+     display: flex;
+}
+ #sidebar-cart ul.products li.product a.remove-button span.remove-icon {
+     width: 15px;
+     height: 16px;
+     background: rgba(117, 117, 122, 0.5);
+     text-indent: -9999px;
+     overflow: hidden;
+     font-size: 0;
+     /*mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 36'%3E%3Cpath fill='currentColor' d='M30.9 2.3h-8.6L21.6 1c-.3-.6-.9-1-1.5-1h-8.2c-.6 0-1.2.4-1.5.9l-.7 1.4H1.1C.5 2.3 0 2.8 0 3.4v2.2c0 .6.5 1.1 1.1 1.1h29.7c.6 0 1.1-.5 1.1-1.1V3.4c.1-.6-.4-1.1-1-1.1zM3.8 32.8A3.4 3.4 0 0 0 7.2 36h17.6c1.8 0 3.3-1.4 3.4-3.2L29.7 9H2.3l1.5 23.8z'/%3E%3C/svg%3E");*/
+     transition: all 0.5s linear;
+     background: url(close-button.png);
+    background-size: cover;
+}
+ #sidebar-cart ul.products li.product a.remove-button:active span.remove-icon, #sidebar-cart ul.products li.product a.remove-button:hover span.remove-icon {
+     background: #c00;
+}
+ #sidebar-cart div.totals {
+     position: absolute;
+     bottom: 80px;
+     left: 0;
+     right: 0;
+     height: 45px;
+     background: #e1e1e7;
+     border-bottom: 1px solid #d7d7de;
+     display: flex;
+     flex-direction: column;
+     flex-wrap: nowrap;
+}
+ #sidebar-cart div.totals div.subtotal, #sidebar-cart div.totals div.shipping, #sidebar-cart div.totals div.tax {
+     padding: 15px;
+     text-align: center;
+     color: #44444a;
+     border-bottom: 1px solid #d7d7de;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+     font-size: 14px;
+     font-weight: 400;
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+     justify-content: space-between;
+}
+ #sidebar-cart div.totals div.subtotal span.amount, #sidebar-cart div.totals div.shipping span.amount, #sidebar-cart div.totals div.tax span.amount {
+     color: #1f9ec5;
+     margin-left: 10px;
+     font-weight: 600;
+}
+ #sidebar-cart div.action-buttons {
+     padding: 0;
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     width: 100%;
+     height: 80px;
+     background: #fff;
+     display: block;
+     white-space: nowrap;
+     background: #574174;
+}
+ #sidebar-cart div.action-buttons a.view-cart-button, #sidebar-cart div.action-buttons a.checkout-button {
+     display: inline-block;
+     padding: 10px;
+     margin: 20px 15px;
+     text-align: center;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+     font-size: 14px;
+     border-width: 1px;
+     border-style: solid;
+     border-radius: 4px;
+     transition: all 0.5s linear;
+}
+ 
+ #sidebar-cart div.action-buttons a.view-cart-button {
+    background: #1a1239;
+    border-color: white;
+    margin-right: 5px;
+    color: white;
+    width: 80px;
+    border-style: solid;
+    border-width: 2px;
+    border-image: linear-gradient(270deg, #c392e8,#719bd4 ,#80d17d,#7ecfa3) 1;
+}
+
+ #sidebar-cart div.action-buttons a.view-cart-button:active, #sidebar-cart div.action-buttons a.view-cart-button:hover {
+     background: rgba(77, 192, 227, 0.2);
+     color: #4dc0e3;
+}
+
+#sidebar-cart div.action-buttons a.checkout-button {
+    border-color: white;
+    background: #1a1239;
+    margin-left: 5px;
+    color: #fff;
+    width: 200px;
+    border-style: solid;
+    border-width: 2px;
+    border-image: linear-gradient(270deg, #c392e8,#719bd4 ,#80d17d,#7ecfa3) 1;
+}
+
+
+
+ #sidebar-cart div.action-buttons a.checkout-button:after {
+     content: url("data:image/svg+xml,%3Csvg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M311.03 131.515l-7.071 7.07c-4.686 4.686-4.686 12.284 0 16.971L387.887 239H12c-6.627 0-12 5.373-12 12v10c0 6.627 5.373 12 12 12h375.887l-83.928 83.444c-4.686 4.686-4.686 12.284 0 16.971l7.071 7.07c4.686 4.686 12.284 4.686 16.97 0l116.485-116c4.686-4.686 4.686-12.284 0-16.971L328 131.515c-4.686-4.687-12.284-4.687-16.97 0z'/%3E%3C/svg%3E");
+     width: 20px;
+     height: 14px;
+     display: inline-block;
+     margin-left: 6px;
+     vertical-align: middle;
+     position: relative;
+     top: -5px;
+     z-index: 1;
+}
+ #sidebar-cart div.action-buttons a.checkout-button:active, #sidebar-cart div.action-buttons a.checkout-button:hover {
+     background: #4753c7;
+     border-color: white;
+}
+ #sidebar-cart-curtain {
+     background: rgba(0, 0, 0, 0.2);
+     display: none;
+     position: absolute;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     z-index: 1;
+}
+a {
+    text-decoration: none;
+}
+ 
+ span.amount.gra-color {
+    font-size: 18px;
+}
+
+a.cart-button {
+    font-size: 28px;
+    background: none;
+    margin-top: -7px;
+}
+</style>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="img">
+            <div><img src="./Img_vids/logo_1.png" alt=""></div>
+        </div>
+
+        <div class="search-box">
+            <div class="container">
+                <input placeholder='Search...' class='js-search' type="text">
+                <ion-icon class="i" name="search-outline" style="margin-top: 10px;"></ion-icon>
+            </div>
+        </div>
+
+
+
+        <!-- section 1 top -->
+        <div class="nav1">
+
+            <nav id="main-nav">
+    <a class="cart-button" href="#"><ion-icon name="cart-outline"></ion-icon></a>
+</nav>
+
+            <!-- The Modal -->
+            <!-- <div id="myModal" class=" modal">
+
+           
+                <div class="modal-content" id=" 1">
+                    <div class="mitems">
+                        <span class="close">&times;</span>
+                        <div class="peritem" style="height: 77px; width: 98px; border: 1px solid black;">
+                            <img src="./photo-1512864733469-8c0d7cc3ccf5.avif" alt=""
+                                style="height: 77px; width: 98px; ">
+                        </div>
+                        <div class="tit-dur">
+                            <p>title</p>
+                            <p>dur:19sec</p>
+                            <button id="rem">remove</button>
+                        </div>
+                        <div>
+                            763/-
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="mitems">
+                        <div class="peritem" style="height: 77px; width: 98px; border: 1px solid black;">
+                            <img src="./photo-1512864733469-8c0d7cc3ccf5.avif" alt=""
+                                style="height: 77px; width: 98px; ">
+                        </div>
+                        <div class="tit-dur">
+                            <p>title</p>
+                            <p>dur:19sec</p>
+                            <button id="rem">remove</button>
+                        </div>
+                        <div>
+                            763/-
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="mitems">
+                        <div class="peritem" style="height: 77px; width: 98px; border: 1px solid black;">
+                            <img src="./photo-1512864733469-8c0d7cc3ccf5.avif" alt=""
+                                style="height: 77px; width: 98px; ">
+                        </div>
+                        <div class="tit-dur">
+                            <p>title</p>
+                            <p>dur:19sec</p>
+                            <button id="rem">remove</button>
+                        </div>
+                        <div>
+                            763/-
+                        </div>
+
+                    </div>
+                    <button class="btnft">
+                        complete order
+                    </button>
+                </div>
+
+         </div> --> 
+
+        </div>
+
+    </div>
+
+
+    <!-- modal -->
+
+    <aside id="sidebar-cart" style="z-index: 999999;">
+    <main>
+        <a href="#" class="close-button"><span class="close-icon">X</span></a>
+        <!-- <h2>Shopping Bag <span class="count">2</span></h2> -->
+        <h2>Shopping Cart</h2>
+        <ul class="products">
+            <li class="product">
+                <a href="#" class="product-link">
+                    <span class="product-image">
+                        <img src="https://public.nftstatic.com/static/nft/zipped/8124adc5c54c41cda551b25c93e3577a_zipped.jpeg" alt="Product Photo">
+                    </span>
+                    <span class="product-details">
+                        <h3>Very Cool Product One</h3>
+                        <span class="qty-price">
+                            <span class="qty">
+                                <button class="minus-button" id="minus-button-1">-</button>
+                                <input type="number" id="qty-input-1" class="qty-input" step="1" min="1" max="1000" name="qty-input" value="1" pattern="[0-9]*" title="Quantity" inputmode="numeric" style="padding: 0;"> 
+                                <button class="plus-button" id="plus-button-1">+</button>
+                                <input type="hidden" name="item-price" id="item-price-1" value="12.00">
+                            </span>
+                            <span class="price gra-color">$16.00</span>
+                        </span>
+                    </span>
+                </a>
+                <a href="#remove" class="remove-button"><span class="remove-icon">X</span></a>
+            </li>
+            <li class="product">
+                <a href="#" class="product-link">
+                    <span class="product-image">
+                        <img src="https://public.nftstatic.com/static/nft/zipped/8124adc5c54c41cda551b25c93e3577a_zipped.jpeg" alt="Product Photo">
+                    </span>
+                    <span class="product-details">
+                        <h3>Very Cool Product Two</h3>
+                        <span class="qty-price">
+                            <span class="qty">
+                                <button class="minus-button" id="minus-button-1">-</button>
+                                <input type="number" id="qty-input-2" class="qty-input" step="1" min="1" max="1000" name="qty-input" value="1" pattern="[0-9]*" title="Quantity" inputmode="numeric" style="padding: 0;">
+                                <button class="plus-button" id="plus-button-1">+</button>
+                                <input type="hidden" name="item-price" id="item-price-2" value="12.00">
+                            </span>
+                            <span class="price gra-color">$28.00</span>
+                        </span>
+                    </span>
+                </a>
+                <a href="#remove" class="remove-button"><span class="remove-icon">X</span></a>
+            </li>
+        </ul>
+        <div class="totals">
+            <div class="subtotal">
+                <span class="label" style="font-weight: 800;">Subtotal:</span> <span class="amount gra-color" style="font-weight: 600;">$54.00</span>
+            </div>
+            <!-- <div class="shipping">
+                <span class="label">Shipping:</span> <span class="amount">$7.95</span>
+            </div>
+            <div class="tax">
+                <span class="label">Tax:</span> <span class="amount">$71.95</span>
+            </div> -->
+        </div>
+        <div class="action-buttons">
+            <a class="view-cart-button" href="#">Cart</a><a class="checkout-button" href="#">Checkout</a>
+        </div>
+    </main>
+</aside>
+<div id="sidebar-cart-curtain"></div>
+
+<!-- modal -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="explore" style="color: white;">
+        <ion-icon name="search-outline"></ion-icon>
+    </div> -->
+    <!-- <div id="carouselExampleSlidesOnly" class="carousel mb-5 " data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./photo-1512864733469-8c0d7cc3ccf5.avif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="./photo-1512864733469-8c0d7cc3ccf5.avif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="./photo-1512864733469-8c0d7cc3ccf5.avif" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div> -->
+    <div class="slideshow-container fade">
+
+
+        <div class="Containers">
+
+            <img src="./img_vids/1.jpg" style="width: 100%; height: 200px;">
+        </div>
+
+        <div class="Containers">
+
+            <img src="./img_vids/2.jpg" style="width: 100%; height: 200px;">
+        </div>
+
+        <div class="Containers">
+
+            <img src="./img_vids/3.jpg" style="width: 100%; height: 200px;">
+        </div>
+
+        <!-- Back and forward buttons -->
+
+        <a class="Back" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="forward" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <br>
+
+    <!-- The circles/dots -->
+    <div style="text-align:center; display: none;">
+        <span class="dots" onclick="currentSlide(1)"></span>
+        <span class="dots" onclick="currentSlide(2)"></span>
+        <span class="dots" onclick="currentSlide(3)"></span>
+    </div>
+    <div class="tags">
+        <div>
+            <p>
+                <ion-icon name="heart-outline" style="color: #a47eb8;"></ion-icon>Entertainment
+            </p>
+        </div>
+        <div>
+            <p>
+                <ion-icon name="musical-notes-outline" style="color: #a47eb8;"></ion-icon>Music
+            </p>
+        </div>
+        <div>
+            <p>
+                <ion-icon name="football-outline" style="color: #a47eb8;"></ion-icon>sports
+            </p>
+        </div>
+        <div>
+            <p>
+                <ion-icon name="happy-outline" style="color: #a47eb8;"></ion-icon>comedy
+            </p>
+        </div>
+        <div>
+            <p>
+                <ion-icon name="airplane-outline" style="color: #a47eb8;"></ion-icon>Travel
+            </p>
+        </div>
+        <div>
+            <p>
+                <ion-icon name="videocam-outline" style="color: #a47eb8;"></ion-icon>vlog
+            </p>
+        </div>
+        <div>
+            <p>
+                <ion-icon name="brush-outline" style="color: #a47eb8;"></ion-icon>animation
+            </p>
+        </div>
+        <div>
+            <p>
+                <ion-icon name="heart-outline" style="color: #a47eb8;"></ion-icon>film
+            </p>
+        </div>
+
+
+<style type="text/css">
+ .gra-color{
+
+  background: linear-gradient(90deg,#c392e8 -.95%,#719bd4 30.29%,#80d17d 63.51%,#7ecfa3 98.11%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: bold;
+    font-weight: 900;
+    font-size: 23px;
+
+}
+
+
+.hr {
+  text-decoration: none;
+  color: #333;
+ background-image: linear-gradient(90deg, #b594e5, #4efdff);
+  background-repeat: no-repeat;
+  background-size: auto .1rem;
+  background-position: bottom;
+
+}
+
+
+</style>
+
+
+    </div>
+    <div class="videoexp">
+        <h3 class="hr" style="margin: 14px; text-transform: capitalize;  padding: 7px 10px 10px 0px;"><span class="gra-color">100 million views</span></h3>
+        <div class="videoslide">
+            <div class="imgpro">
+
+                <a href=" ./videodetail.html">
+                    <img src="./thumbs links/1/Girl Ends Up.jpeg" alt="">
+                </a>
+                <span class="wishlilst-icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </span>
+                <div class="exfooter">
+                    <h6>This Greedy Shopkeeper Cheats His Customers, Regrets Later</h6>
+                    <p> Creator name</p>
+                    <div>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="heart-outline"></ion-icon>
+                            <p>1234</p>
+                        </span>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="eye-outline"></ion-icon>
+                            <p>9999</p>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="imgpro">
+
+                <a href=" ./videodetail.html">
+                    <img src="./thumbs links/2/2.jpeg" alt="">
+                </a>
+                <span class="wishlilst-icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </span>
+                <div class="exfooter">
+                    <h6>This Greedy Shopkeeper Cheats His Customers, Regrets Later</h6>
+                    <p> Creator name</p>
+                    <div>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="heart-outline"></ion-icon>
+                            <p>1234</p>
+                        </span>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="eye-outline"></ion-icon>
+                            <p>9999</p>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="imgpro">
+
+                <a href=" ./videodetail.html">
+                    <img src="./thumbs links/3/3.jpeg" alt="">
+                </a>
+                <span class="wishlilst-icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </span>
+                <div class="exfooter">
+                    <h6>This Greedy Shopkeeper Cheats His Customers, Regrets Later</h6>
+                    <p> Creator name</p>
+                    <div>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="heart-outline"></ion-icon>
+                            <p>1234</p>
+                        </span>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="eye-outline"></ion-icon>
+                            <p>9999</p>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="imgpro">
+
+                <a href=" ./videodetail.html">
+                    <img src="./thumbs links/4/4.jpeg" alt="">
+                </a>
+                <span class="wishlilst-icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </span>
+                <div class="exfooter">
+                    <h6>This Greedy Shopkeeper Cheats His Customers, Regrets Later</h6>
+                    <p> Creator name</p>
+                    <div>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="heart-outline"></ion-icon>
+                            <p>1234</p>
+                        </span>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="eye-outline"></ion-icon>
+                            <p>9999</p>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="add-space" style="">
+            
+        </div>
+        <h3 class="hr" style="margin: 14px; padding: 7px 10px 10px 0px; text-transform: capitalize;"><span class="gra-color">50 million views</span></h3>
+        <div class="videoslide">
+            <div class="imgpro">
+
+                <a href=" ./videodetail.html">
+                    <img src="./thumbs links/5/5.jpeg" alt="">
+                </a>
+                <span class="wishlilst-icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </span>
+                <div class="exfooter">
+                    <h6>This Greedy Shopkeeper Cheats His Customers, Regrets Later</h6>
+                    <p> Creator name</p>
+                    <div>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="heart-outline"></ion-icon>
+                            <p>1234</p>
+                        </span>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="eye-outline"></ion-icon>
+                            <p>9999</p>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="imgpro">
+
+                <a href=" ./videodetail.html">
+                    <img src="./thumbs links/6/6.jpeg" alt="">
+                </a>
+                <span class="wishlilst-icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </span>
+                <div class="exfooter">
+                    <h6>This Greedy Shopkeeper Cheats His Customers, Regrets Later</h6>
+                    <p> Creator name</p>
+                    <div>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="heart-outline"></ion-icon>
+                            <p>1234</p>
+                        </span>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="eye-outline"></ion-icon>
+                            <p>9999</p>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="imgpro">
+
+                <a href=" ./videodetail.html">
+                    <img src="./thumbs links/7/7.jpeg" alt="">
+                </a>
+                <span class="wishlilst-icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </span>
+                <div class="exfooter">
+                    <h6>This Greedy Shopkeeper Cheats His Customers, Regrets Later</h6>
+                    <p> Creator name</p>
+                    <div>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="heart-outline"></ion-icon>
+                            <p>1234</p>
+                        </span>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="eye-outline"></ion-icon>
+                            <p>9999</p>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="imgpro">
+
+                <a href=" ./videodetail.html">
+                    <img src="./thumbs links/8/8.webp" alt="">
+                </a>
+                <span class="wishlilst-icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </span>
+                <div class="exfooter">
+                    <h6>This Greedy Shopkeeper Cheats His Customers, Regrets Later</h6>
+                    <p> Creator name</p>
+                    <div>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="heart-outline"></ion-icon>
+                            <p>1234</p>
+                        </span>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="eye-outline"></ion-icon>
+                            <p>9999</p>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="add-space" style="">
+        
+    </div>
+    <h3 class="hr" style="color: white; margin: 14px; padding: 7px 10px 10px 0px; text-transform: capitalize;"><span class="gra-color">Top Creators</span></h3>
+    <div class="creators">
+
+        <div class="useraccount">
+            <img src="./img_vids/creator1.jpg" alt="">
+            <h5>Bhuva...</h5>
+        </div>
+        <div class="useraccount">
+            <img src="./img_vids/creator1.jpg" alt="">
+            <h5>Bhuva...</h5>
+        </div>
+        <div class="useraccount">
+            <img src="./img_vids/creator1.jpg" alt="">
+            <h5>Bhuva...</h5>
+        </div>
+        <div class="useraccount">
+            <img src="./img_vids/creatore.jpg" alt="">
+            <h5>Puran...</h5>
+        </div>
+        <div class="useraccount">
+            <img src="./img_vids/creatore2.jpg" alt="">
+            <h5>TVF</h5>
+        </div>
+        <div class="useraccount">
+            <img src="./img_vids/pro.png" alt="">
+            <h5>Puran...</h5>
+        </div>
+        <div class="useraccount">
+            <img src="./img_vids/creator4.jpg" alt="">
+            <h5>Carry...</h5>
+        </div>
+    </div>
+    <div class="videoexp">
+        <h3 class="hr" style="padding: 7px 10px 10px 0px;"><span class="gra-color">Trending</span></h3>
+        <div class="videoslide">
+            <div class="imgpro">
+
+                <a href=" ./videodetail.html">
+                    <img src="./thumbs links/9/9.jpeg" alt="">
+                </a>
+                <span class="wishlilst-icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </span>
+                <div class="exfooter">
+                    <h6>This Greedy Shopkeeper Cheats His Customers, Regrets Later</h6>
+                    <p> Creator name</p>
+                    <div>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="heart-outline"></ion-icon>
+                            <p>1234</p>
+                        </span>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="eye-outline"></ion-icon>
+                            <p>9999</p>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="imgpro">
+
+                <a href=" ./videodetail.html">
+                    <img src="./thumbs links/10/10.jpg" alt="">
+                </a>
+                <span class="wishlilst-icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </span>
+                <div class="exfooter">
+                    <h6>This Greedy Shopkeeper Cheats His Customers, Regrets Later</h6>
+                    <p> Creator name</p>
+                    <div>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="heart-outline"></ion-icon>
+                            <p>1234</p>
+                        </span>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="eye-outline"></ion-icon>
+                            <p>9999</p>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="videoslide">
+            <div class="imgpro">
+
+                <a href="./videodetail.html">
+                    <img src="./thumbs links/10/10.webp" alt="">
+                </a>
+                <span class="wishlilst-icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </span>
+                <div class="exfooter">
+                    <h6>This Greedy Shopkeeper Cheats His Customers, Regrets Later</h6>
+                    <p> Creator name</p>
+                    <div>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="heart-outline"></ion-icon>
+                            <p>1234</p>
+                        </span>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="eye-outline"></ion-icon>
+                            <p>9999</p>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="imgpro">
+                <a href=" ./videodetail.html">
+                    <img src="./thumbs links/2/2.jpeg" alt="">
+                </a>
+                <span class="wishlilst-icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </span>
+                <div class="exfooter">
+                    <h6>This Greedy Shopkeeper Cheats His Customers, Regrets Later</h6>
+                    <p> Creator name</p>
+                    <div>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="heart-outline"></ion-icon>
+                            <p>1234</p>
+                        </span>
+                        <span>
+                            <ion-icon style="color:#e91e63 ;" name="eye-outline"></ion-icon>
+                            <p>9999</p>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- <div class="additem">
+       
+    </div> -->
+
+
+
+    <!-- <div id="popup1" class="overlay">
+        <div class="popup">
+            <div class="addform">
+                <form action="/action_page.php">
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+                    <label for="country">Country</label>
+                    <select id="country" name="country">
+                        <option value="australia">Australia</option>
+                        <option value="canada">Canada</option>
+                        <option value="usa">USA</option>
+                    </select>
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <a class="close" href="#">&times;</a>
+
+        </div>
+    </div> -->
+    <div class="box1">
+        <a class="additem" href="#popup1">
+            <ion-icon name="add-outline"></ion-icon>
+        </a>
+    </div>
+
+    <!-- <div id="popup1" class="overlay">
+	<div class="popup">
+		<div class="form">
+  <form action="/action_page.php">
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+    <label for="country">Country</label>
+    <select id="country" name="country">
+      <option value="australia">Australia</option>
+      <option value="canada">Canada</option>
+      <option value="usa">USA</option>
+    </select>
+  
+    <input type="submit" value="Submit">
+  </form>
+</div>
+		<a class="close" href="#">&times;</a>		<div class="content">
+			Thank to pop me out of that button, but now i'm done so you can close this window.
+		</div> 
+	</div>
+</div> -->
+    <div class="botnav">
+        <div class="navleft" style="display: flex; ">
+
+            <div class="home" style="margin: 20px;">
+                <a class="active" href="home.html">
+                    <ion-icon id=" " name="home-outline"></ion-icon>
+                    <p style="font-size: 12px;">
+                        Home
+                    </p>
+                   
+                </a>
+            </div>
+            <div class="rock" style="margin: 20px;">
+                <a href="./explore.html">
+                    <ion-icon id=" " name="aperture-outline"></ion-icon>
+                </a>
+            </div>
+        </div>
+        <div class="navright" style="display: flex; ">
+            <div class="text" style="margin: 20px;">
+                <a href="./creatorschat.html">
+                    <ion-icon id=" " name="chatbubble-ellipses-outline"></ion-icon>
+                    </ion-icon>
+                </a>
+            </div>
+            <div class="people" style="margin: 20px;">
+                <a href="./userprofile.html">
+                    <ion-icon id=" " name="person-outline"></ion-icon>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="./scripts/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function($) {
+    // Declare the body variable
+    var $body = $("body");
+
+    // Function that shows and hides the sidebar cart
+    $(".cart-button, .close-button, #sidebar-cart-curtain").click(function(e) {
+        e.preventDefault();
+        
+        // Add the show-sidebar-cart class to the body tag
+        $body.toggleClass("show-sidebar-cart");
+
+        // Check if the sidebar curtain is visible
+        if ($("#sidebar-cart-curtain").is(":visible")) {
+            // Hide the curtain
+            $("#sidebar-cart-curtain").fadeOut(500);
+        } else {
+            // Show the curtain
+            $("#sidebar-cart-curtain").fadeIn(500);
+        }
+    });
+    
+    // Function that adds or subtracts quantity when a 
+    // plus or minus button is clicked
+    $body.on('click', '.plus-button, .minus-button', function () {
+        // Get quanitity input values
+        var qty = $(this).closest('.qty').find('.qty-input');
+        var val = parseFloat(qty.val());
+        var max = parseFloat(qty.attr('max'));
+        var min = parseFloat(qty.attr('min'));
+        var step = parseFloat(qty.attr('step'));
+
+        // Check which button is clicked
+        if ($(this).is('.plus-button')) {
+            // Increase the value
+            qty.val(val + step);
+        } else {
+            // Check if minimum button is clicked and that value is 
+            // >= to the minimum required
+            if (min && min >= val) {
+                // Do nothing because value is the minimum required
+                qty.val(min);
+            } else if (val > 0) {
+                // Subtract the value
+                qty.val(val - step);
+            }
+        }
+    });
+});
+
+</script>
+</body>
+</html>

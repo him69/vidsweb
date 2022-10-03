@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Chat</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
+ body {
+     background: #4753c7;
+     position: fixed;
+     height: 100%;
+     width: 100%;
+     margin: 0;
+     padding: 0;
+     font-family: "Lato";
+     /*display: flex;*/
+     justify-content: center;
+     align-items: center;
+}
+ body .main-screen {
+     height: 100vh;
+     width: 100%;
+     background: white;
+     /*border-radius: 20px;*/
+     overflow: overlay;
+}
+ body .main-screen .home-screen {
+     height: 100%;
+     display: block;
+     padding: 0 2rem;
+     position: relative;
+     -webkit-animation: fadein 2s;
+    /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 2s;
+    /* Firefox < 16 */
+     -ms-animation: fadein 2s;
+    /* Internet Explorer */
+     -o-animation: fadein 2s;
+    /* Opera < 12.1 */
+     animation: fadein 2s;
+     background: linear-gradient(183deg, rgba(26, 18, 57, 1) 70%, rgba(49, 21, 79, 1) 60%, rgba(29, 20, 63, 1) 10%);
+}
+ body .main-screen .home-screen-header {
+     display: flex;
+     padding-top: 2rem;
+     justify-content: space-between;
+     align-items: center;
+}
+ body .main-screen .home-screen-header span {
+     height: 40px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+    /* width: 100%;
+     */
+     width: 40px;
+     cursor: pointer;
+     transition: 0.25s all;
+}
+ body .main-screen .home-screen-header span:hover {
+     transform: scale(1.5);
+}
+ body .main-screen .home-screen-tabbar {
+     padding: 1rem 0 0 0;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+ body .main-screen .home-screen-tabbar span {
+     color: #868ca0;
+     font-size: 16px;
+}
+ body .main-screen .home-screen-tabbar span.active {
+     color: #fff;
+     font-size: 20px;
+}
+ body .main-screen .home-screen-fav {
+     padding: 2rem 0 1rem 0;
+     display: flex;
+     flex-direction: column;
+     justify-content: start;
+}
+ body .main-screen .home-screen-fav label {
+     color: #868ca8;
+     font-size: 14px;
+     margin-bottom: 1rem;
+}
+ body .main-screen .home-screen-fav-row {
+     display: flex;
+     gap: 1rem;
+     justify-content: space-between;
+}
+ body .main-screen .home-screen-fav-row span {
+     height: 60px;
+     cursor: pointer;
+}
+ body .main-screen .home-screen-fav-row span img {
+     width: 60px;
+     height: 60px;
+     border-radius: 100px;
+}
+ body .main-screen .home-screen-fav-row span h6 {
+     margin: 0;
+     margin-top: 0.5rem;
+     text-align: center;
+}
+ body .main-screen .home-screen-fav-row span.active {
+     border: 2px solid;
+     border-radius: 100px;
+     padding: 0px;
+}
+ body .main-screen .home-screen .divider {
+     margin: 2rem 0;
+     border-color: #868293;
+     border-width: 1px;
+}
+ body .main-screen .home-screen-messages {
+     height: 100%;
+}
+ body .main-screen .home-screen-messages-message {
+     display: flex;
+     gap: 1rem;
+     align-items: center;
+     margin-bottom: 2rem;
+     cursor: pointer;
+     position: relative;
+}
+ body .main-screen .home-screen-messages-message img {
+     height: 60px;
+     width: 60px;
+     border-radius: 100%;
+}
+ body .main-screen .home-screen-messages-message-content {
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+}
+ body .main-screen .home-screen-messages-message-content-top {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     margin-bottom: 0.5rem;
+}
+ body .main-screen .home-screen-messages-message-content-top h4 {
+     margin: 0;
+     font-size: 16px;
+}
+ body .main-screen .home-screen-messages-message-content-top span {
+     font-size: 14px;
+}
+ body .main-screen .home-screen-messages-message-content-bottom {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+}
+ body .main-screen .home-screen-messages-message-content-bottom h4 {
+     margin: 0;
+     font-size: 14px;
+     font-weight: 400;
+     color: #868ca0;
+}
+ body .main-screen .home-screen-messages-message-content-bottom span {
+     font-size: 14px;
+     width: 30px;
+     text-align: center;
+     background: #4753c7;
+     color: white;
+     height: 20px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     border-radius: 10px;
+}
+ body .main-screen .home-screen-messages-message::after {
+     content: "";
+     position: absolute;
+     bottom: -10px;
+     width: 100%;
+     height: 1px;
+     background: #868293;
+     right: 0;
+}
+ body .main-screen .chat-screen {
+     height: 100%;
+     padding: 0 2rem;
+     position: relative;
+     display: none;
+     -webkit-animation: fadein 2s;
+    /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 2s;
+    /* Firefox < 16 */
+     -ms-animation: fadein 2s;
+    /* Internet Explorer */
+     -o-animation: fadein 2s;
+    /* Opera < 12.1 */
+     animation: fadein 2s;
+}
+ body .main-screen .chat-screen-header {
+     display: flex;
+     padding-top: 2rem;
+     justify-content: space-between;
+     align-items: center;
+     position: -webkit-sticky;
+    /* width: 100%;
+     */
+     top: 0;
+     /*background: white;*/
+}
+ body .main-screen .chat-screen-header-left {
+     display: flex;
+     align-items: center;
+}
+ body .main-screen .chat-screen-header-left-username h4 {
+     margin: 0;
+     margin-bottom: 0.2rem;
+     color: white;
+}
+ body .main-screen .chat-screen-header-left-username span {
+     position: relative;
+     font-size: 12px;
+     justify-content: start !important;
+     width: 75px !important;
+     margin: 0 !important;
+     height: auto !important;
+     color: #868ca0;
+}
+ body .main-screen .chat-screen-header-left-username span:hover {
+     transform: none !important;
+}
+ body .main-screen .chat-screen-header-left-username span::after {
+     position: absolute;
+     content: "";
+     right: 0;
+     top: 0;
+     height: 8px;
+     width: 8px;
+     border-radius: 100px;
+     background: #08b827;
+}
+ body .main-screen .chat-screen-header span {
+     height: 40px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+    /* width: 100%;
+     */
+     width: 40px;
+     cursor: pointer;
+     transition: 0.25s all;
+}
+ body .main-screen .chat-screen-header span:hover {
+     transform: scale(1.5);
+}
+ body .main-screen .chat-screen-body {
+     padding: 2rem 0;
+}
+ body .main-screen .chat-screen-body .message-sender {
+     display: flex;
+     gap: 1rem;
+     margin-bottom: 2rem;
+}
+ body .main-screen .chat-screen-body .message-sender img {
+     height: 40px;
+     width: 40px;
+     align-self: flex-end;
+     border-radius: 100px;
+}
+ body .main-screen .chat-screen-body .message-sender-content {
+     display: flex;
+     flex-direction: column;
+}
+ body .main-screen .chat-screen-body .message-sender-content-message {
+     font-size: 14px;
+     padding: 1rem;
+     background: #f9f9f9;
+     border-radius: 0 10px 10px 10px;
+}
+ body .main-screen .chat-screen-body .message-sender-content-time {
+     margin-top: 0.5rem;
+     font-size: 10px;
+     color: #acacac;
+}
+ body .main-screen .chat-screen-body #typing {
+     display: none;
+}
+ body .main-screen .chat-screen-body .message-reciever {
+     display: flex;
+     gap: 1rem;
+     margin-bottom: 2rem;
+}
+ body .main-screen .chat-screen-body .message-reciever img {
+     height: 40px;
+     width: 40px;
+     align-self: flex-end;
+     border-radius: 100px;
+}
+ body .main-screen .chat-screen-body .message-reciever-content {
+     display: flex;
+     flex-direction: column;
+}
+ body .main-screen .chat-screen-body .message-reciever-content-message {
+     font-size: 14px;
+     padding: 1rem;
+     background: #f9f9f9;
+     border-radius: 0 10px 10px 10px;
+}
+ body .main-screen .chat-screen-body .message-reciever-content-time {
+     margin-top: 0.5rem;
+     font-size: 10px;
+     color: #acacac;
+     text-align: right;
+}
+ body .main-screen .chat-screen-body .message-typing {
+     font-size: 14px;
+     padding: 1rem;
+     background: #f9f9f9;
+     border-radius: 0 10px 10px 10px;
+     margin-bottom: 2rem;
+}
+ body .main-screen .chat-screen-footer {
+     position: sticky;
+     bottom: 16px;
+     width: 100%;
+    /* width: 100%;
+     */
+     left: 0;
+    /* padding: 0;
+     */
+     right: 0;
+     margin: 0 auto;
+}
+ body .main-screen .chat-screen-footer .input {
+     display: flex;
+     align-items: center;
+}
+ body .main-screen .chat-screen-footer .input input {
+     width: 100%;
+     position: relative;
+     padding: 0.8rem;
+     border-radius: 1rem;
+     border: none;
+     background: #f4f4f4;
+}
+ body .main-screen .chat-screen-footer .input button {
+     position: absolute;
+     right: 5px;
+    /* padding: 8px;
+     */
+    /* top: 8px;
+     */
+     height: 30px;
+    /* bottom: 5px;
+     */
+     width: 30px;
+     border-radius: 100px;
+     border: none;
+     background: #4753c7;
+     color: white;
+     cursor: pointer;
+}
+ body .main-screen .search-screen {
+     height: 100%;
+     padding: 0 2rem;
+     position: relative;
+     display: none;
+     -webkit-animation: fadein 2s;
+    /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 2s;
+    /* Firefox < 16 */
+     -ms-animation: fadein 2s;
+    /* Internet Explorer */
+     -o-animation: fadein 2s;
+    /* Opera < 12.1 */
+     animation: fadein 2s;
+}
+ body .main-screen .search-screen-header {
+     display: flex;
+     padding-top: 2rem;
+     justify-content: space-between;
+     align-items: center;
+     position: -webkit-sticky;
+     z-index: 10;
+     padding-bottom: 1rem;
+     /*background: white;*/
+    /* width: 100%;
+     */
+     top: 0;
+     /*background: white;*/
+}
+ body .main-screen .search-screen-header-left {
+     display: flex;
+     align-items: center;
+}
+ body .main-screen .search-screen-header-left-username h4 {
+     margin: 0;
+     margin-bottom: 0.2rem;
+}
+ body .main-screen .search-screen-header-left-username span {
+     position: relative;
+     font-size: 12px;
+     justify-content: start !important;
+     width: 75px !important;
+     margin: 0 !important;
+     height: auto !important;
+     color: #868ca0;
+}
+ body .main-screen .search-screen-header-left-username span:hover {
+     transform: none !important;
+}
+ body .main-screen .search-screen-header-left-username span::after {
+     position: absolute;
+     content: "";
+     right: 0;
+     top: 0;
+     height: 8px;
+     width: 8px;
+     border-radius: 100px;
+     background: #08b827;
+}
+ body .main-screen .search-screen-header span {
+     height: 40px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+    /* width: 100%;
+     */
+     width: 40px;
+     cursor: pointer;
+     transition: 0.25s all;
+}
+ body .main-screen .search-screen-header span:hover {
+     transform: scale(1.5);
+}
+ body .main-screen .search-screen-header input {
+     width: 100%;
+     position: relative;
+     padding: 0.8rem;
+     border-radius: 1rem;
+     border: none;
+     background: #f4f4f4;
+}
+ body .main-screen .search-screen-body {
+     padding: 1rem 0;
+}
+ body .main-screen .search-screen-body-item {
+     display: flex;
+     gap: 1rem;
+     align-items: center;
+     margin-bottom: 2rem;
+     cursor: pointer;
+     position: relative;
+}
+ body .main-screen .search-screen-body-item img {
+     height: 60px;
+     width: 60px;
+     margin-right: 10px;
+     border-radius: 2rem;
+}
+ body .main-screen .search-screen-body-item-content {
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+}
+ body .main-screen .search-screen-body-item-content-top {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     margin-bottom: 0.5rem;
+     width: 100%;
+}
+ body .main-screen .search-screen-body-item-content-top h4 {
+     margin: 0;
+     font-size: 16px;
+}
+ body .main-screen .search-screen-body-item-content-top span {
+     font-size: 14px;
+}
+ body .main-screen .search-screen-body-item-content-bottom {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+}
+ body .main-screen .search-screen-body-item-content-bottom p {
+     margin: 0;
+     font-size: 14px;
+     font-weight: 400;
+     color: #868ca0;
+}
+ body .main-screen .search-screen-body-item-content-bottom span {
+     font-size: 14px;
+     width: 30px;
+     text-align: center;
+     background: #4753c7;
+     color: white;
+     height: 20px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     border-radius: 10px;
+}
+ body .main-screen .search-screen-body-item::after {
+     content: "";
+     position: absolute;
+     bottom: -10px;
+     width: 100%;
+     height: 1px;
+     background: #868293;
+     right: 0;
+}
+
+.home-screen-fav-row span h6 {
+    color: white;
+}
+
+
+.home-screen-messages-message-content-top h4 {
+    color: white;
+}
+p
+
+.home-screen-messages-message-content-top span {
+    color: white;
+}
+
+.home-screen-messages-message-content-top span {
+    color: white;
+}
+
+.search-screen-body-item-content-top h4 {
+    color: white;
+}
+
+.search-screen-body-item-content-top span {
+    color: white;
+}
+
+ @keyframes fadein {
+     from {
+         opacity: 0;
+    }
+     to {
+         opacity: 1;
+    }
+}
+/* Firefox < 16 */
+ @-moz-keyframes fadein {
+     from {
+         opacity: 0;
+    }
+     to {
+         opacity: 1;
+    }
+}
+/* Safari, Chrome and Opera > 12.1 */
+ @-webkit-keyframes fadein {
+     from {
+         opacity: 0;
+    }
+     to {
+         opacity: 1;
+    }
+}
+/* Internet Explorer */
+ @-ms-keyframes fadein {
+     from {
+         opacity: 0;
+    }
+     to {
+         opacity: 1;
+    }
+}
+/* Opera < 12.1 */
+ @-o-keyframes fadein {
+     from {
+         opacity: 0;
+    }
+     to {
+         opacity: 1;
+    }
+}
+ 
+
+ .message-sender-content {
+    width: 100%;
+}
+
+.message-reciever-content {
+    width: 100%;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="main">
+    <div class="main-screen" style=" background: linear-gradient(183deg, rgba(26, 18, 57, 1) 70%, rgba(49, 21, 79, 1) 60%, rgba(29, 20, 63, 1) 10%);">
+        <div id="homeScreen" class="home-screen">
+            <div class="home-screen-header">
+                <span class="back-button">
+                    <a href="home.html"><i class="fas fa-long-arrow-alt-left" style="color: white;"></i></a>
+                </span>
+                <span id="search-button" class="search-button">
+                    <i class="fas fa-search" style="color: white;"></i>
+                </span>
+            </div>
+            <div class="home-screen-tabbar">
+                <span class="active">Messages</span>
+                <span>Calls</span>
+                <span>Groups</span>
+            </div>
+            <div class="home-screen-fav">
+                <label for="">Favourite</label>
+                <div class="home-screen-fav-row">
+                    <span>
+                        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg" alt="">
+                        <h6>Elesi</h6>
+                    </span>
+                    <span class="active">
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/001/546/003/small/indian-woman-s-face-avatar-free-vector.jpg" alt="">
+                        <h6>Mary</h6>
+                    </span>
+                    <span>
+                        <img src="https://pbs.twimg.com/media/EbNX_erVcAUlwIx.jpg:small" alt="">
+                        <h6>Vic</h6>
+                    </span>
+                    <span>
+                        <img src="https://cdn.dribbble.com/users/3020080/screenshots/15085975/my_3d_face.png" alt="">
+                        <h6>John</h6>
+                    </span>
+                </div>
+            </div>
+            <hr class="divider">
+            <div id="homeScreenMessagesBody" class="home-screen-messages">
+
+            </div>
+        </div>
+        <div id="chatScreen" class="chat-screen">
+            <div class="chat-screen-header">
+                <div class="chat-screen-header-left">
+                    <span id="chatBackbutton" class="back-button">
+                        <i class="fas fa-long-arrow-alt-left" style="color: white;"></i>
+                    </span>
+                    <div class="chat-screen-header-left-username">
+                        <h4>Abhishek Dana</h4>
+                        <span>Active Now</span>
+                    </div>
+                </div>
+                <span class="search-button">
+                    <i class="fas fa-ellipsis-h" style="color: white;"></i>
+                </span>
+            </div>
+            <div class="chat-screen-body">
+                <div class="message-sender"> <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg" alt="">
+                    <div class="message-sender-content">
+                        <span class="message-sender-content-message">hey man, this is some message to test.😅 </span>
+                        <span class="message-sender-content-time">00:12</span>
+                    </div>
+                </div>
+                <div class="message-reciever">
+                    <div class="message-reciever-content">
+                        <span class="message-reciever-content-message">hey man, this is some message to test.😅 </span>
+                        <span class="message-reciever-content-time">00:12</span>
+                    </div>
+                    <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg" alt="">
+                </div>
+                <div class="message-sender"> <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg" alt="">
+                    <div class="message-sender-content">
+                        <span class="message-sender-content-message">hey man, this is some message to test.😅 </span>
+                        <span class="message-sender-content-time">00:12</span>
+                    </div>
+                </div>
+                <div class="message-reciever">
+                    <div class="message-reciever-content">
+                        <span class="message-reciever-content-message">hey man, this is some message to test.😅 </span>
+                        <span class="message-reciever-content-time">00:12</span>
+                    </div>
+                    <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg" alt="">
+                </div>
+                <div class="message-reciever">
+                    <div class="message-reciever-content">
+                        <span class="message-reciever-content-message">hey man, this is some message to test.😅 </span>
+                        <span class="message-reciever-content-time">00:12</span>
+                    </div>
+                    <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg" alt="">
+                </div>
+                <div class="message-reciever">
+                    <div class="message-reciever-content">
+                        <span class="message-reciever-content-message">hey man, this is some message to test.😅 </span>
+                        <span class="message-reciever-content-time">00:12</span>
+                    </div>
+                    <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg" alt="">
+                </div>
+                <div class="message-reciever">
+                    <div class="message-reciever-content">
+                        <span class="message-reciever-content-message">hey man, this is some message to test.😅 </span>
+                        <span class="message-reciever-content-time">00:12</span>
+                    </div>
+                    <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg" alt="">
+                </div>
+                <div id="typing" class="message-sender"> <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg" alt="">
+                    <div class="message-sender-content">
+                        <span class="message-sender-content-message">Typing....</span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="chat-screen-footer">
+                <div class="input">
+                    <input id="message-input" placeholder="Type new message" type="text">
+                    <button>
+                        <i class="fa fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="searchScreen" class="search-screen">
+            <div class="search-screen-header">
+                <span id="chat-back-button" class="back-button">
+                    <i class="fas fa-long-arrow-alt-left" style="color: white;"></i>
+                </span>
+                <input id="searchInput" onkeyup="search_message()" type="text" placeholder="Search" class="search-input"></input>
+            </div>
+            <div id="searchScreenBody" class="search-screen-body">
+                <div class="search-screen-body-item">
+                    <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg" alt="">
+                    <div class="search-screen-body-item-content">
+                        <div class="search-screen-body-item-content-top">
+                            <h4>Abhishek Dana</h4>
+                            <span>12:00</span>
+                        </div>
+                        <div class="search-screen-body-item-content-bottom">
+                            <p>This is some test message</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    let searchButton = document.getElementById("search-button");
+let chatBackbutton = document.getElementById("chatBackbutton");
+let searchBackButton = document.getElementById("chat-back-button");
+let searchScreen = document.getElementById("searchScreen");
+let chatScreen = document.getElementById("chatScreen");
+let homeScreen = document.getElementById("homeScreen");
+let messageInput = document.getElementById("message-input");
+let homeScreenMessagesBody = document.getElementById("homeScreenMessagesBody");
+let searchScreenBody = document.getElementById("searchScreenBody");
+let messages = [
+    {
+        image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg",
+        name: "Abhishek Dana",
+        count: 2,
+        message: "Hey! how are you..",
+        timeStamp: " Just Now"
+    },
+    {
+        image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg",
+        name: "Alpesh Dana",
+        count: 4,
+        message: "What are you doing?",
+        timeStamp: "1 Min"
+    },
+    {
+        image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg",
+        name: "Neeraj Dana",
+        count: 0,
+        message: "Let talk tomorrow",
+        timeStamp: "Yesterday"
+    },
+    {
+        image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg",
+        name: "Dheeraj Dana",
+        count: 0,
+        message: "Dont Know",
+        timeStamp: "Yesterday"
+    },
+    {
+        image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg",
+        name: "Himanshu Dana",
+        count: 5,
+        message: "Why are you not seeing",
+        timeStamp: "23/04/2021"
+    },
+    {
+        image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg",
+        name: "Akash Verma",
+        count: 2,
+        message: "Hey! how are you..",
+        timeStamp: "22/04/2021"
+    },
+    {
+        image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg",
+        name: "Vinu Yaday",
+        count: 0,
+        message: "Bye",
+        timeStamp: "22/04/2021"
+    },
+    {
+        image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg",
+        name: "Anjali Yadav",
+        count: 0,
+        message: "Take care, And Have Fun",
+        timeStamp: "22/04/2021"
+    },
+    {
+        image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg",
+        name: "Michel Jackson",
+        count: 0,
+        message: "Come to my concert",
+        timeStamp: "22/04/2021"
+    },
+    {
+        image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/dbc1dd99666153.5ef7dbf39ecee.jpg",
+        name: "John Vinod",
+        count: 12,
+        message: "Will do work together",
+        timeStamp: "15/04/2021"
+    }
+];
+
+messages = messages.sort((a, b) => {
+    if (a.timestamp > b.timestamp) return 1;
+});
+messages.forEach((message) => {
+    // Main Element
+    var main = document.createElement("div");
+    main.id = "message";
+    main.classList.add("home-screen-messages-message");
+
+    //Image Element
+    var img = document.createElement("img");
+    img.src = message.image;
+
+    // Added Image To Main
+    main.appendChild(img);
+
+    // MainContent Element
+    var mainContent = document.createElement("div");
+    mainContent.classList.add("home-screen-messages-message-content");
+
+    // Main Content Top
+    var mainContentTop = document.createElement("div");
+    mainContentTop.classList.add("home-screen-messages-message-content-top");
+
+    // Main Content Top h4
+    var mainContentToph4 = document.createElement("h4");
+    mainContentToph4.innerText = message.name;
+
+    // Main Content Top Span
+    var mainContentTopSpan = document.createElement("span");
+    mainContentTopSpan.innerText = message.timeStamp;
+
+    mainContentTop.appendChild(mainContentToph4);
+    mainContentTop.appendChild(mainContentTopSpan);
+
+    mainContent.appendChild(mainContentTop);
+
+    // Main Content Bottom
+    var mainContentBottom = document.createElement("div");
+    mainContentBottom.classList.add("home-screen-messages-message-content-bottom");
+
+    // Main Content Bottom H4
+    var mainContentBottomh4 = document.createElement("h4");
+    mainContentBottomh4.innerText = message.message;
+
+    mainContentBottom.appendChild(mainContentBottomh4);
+
+    if (message.count != 0) {
+        var mainContentBottomSpan = document.createElement("span");
+        mainContentBottomSpan.innerText = message.count;
+        mainContentBottom.appendChild(mainContentBottomSpan);
+    }
+
+    mainContent.appendChild(mainContentBottom);
+    main.appendChild(mainContent);
+    homeScreenMessagesBody.appendChild(main);
+});
+let elementsArray = document.querySelectorAll("#message");
+
+elementsArray.forEach(function (elem) {
+    elem.addEventListener("click", function () {
+        console.log("Clicked");
+        homeScreen.style.display = "none ";
+        chatScreen.style.display = "block ";
+        searchScreen.style.display = "none ";
+    });
+});
+
+chatBackbutton.addEventListener("click", function () {
+    chatScreen.style.display = "none ";
+    searchScreen.style.display = "none ";
+    homeScreen.style.display = "block ";
+});
+
+messageInput.addEventListener("focus", function () {
+    document.getElementById("typing").style.display = "flex";
+});
+messageInput.addEventListener("focusout", function () {
+    document.getElementById("typing").style.display = "none";
+});
+
+searchButton.addEventListener("click", function () {
+    searchScreen.style.display = "block ";
+    chatScreen.style.display = "none ";
+    homeScreen.style.display = "none ";
+});
+searchBackButton.addEventListener("click", function () {
+    searchScreen.style.display = "none ";
+    chatScreen.style.display = "none ";
+    homeScreen.style.display = "block ";
+});
+
+messages.forEach((message) => {
+    // Main Element
+    var main = document.createElement("div");
+    main.classList.add("search-screen-body-item");
+
+    //Image Element
+    var img = document.createElement("img");
+    img.src = message.image;
+
+    // Added Image To Main
+    main.appendChild(img);
+
+    // MainContent Element
+    var mainContent = document.createElement("div");
+    mainContent.classList.add("search-screen-body-item-content");
+
+    // Main Content Top
+    var mainContentTop = document.createElement("div");
+    mainContentTop.classList.add("search-screen-body-item-content-top");
+
+    // Main Content Top h4
+    var mainContentToph4 = document.createElement("h4");
+    mainContentToph4.innerText = message.name;
+
+    // Main Content Top Span
+    var mainContentTopSpan = document.createElement("span");
+    mainContentTopSpan.innerText = message.timeStamp;
+
+    mainContentTop.appendChild(mainContentToph4);
+    mainContentTop.appendChild(mainContentTopSpan);
+
+    mainContent.appendChild(mainContentTop);
+
+    // Main Content Bottom
+    var mainContentBottom = document.createElement("div");
+    mainContentBottom.classList.add("search-screen-body-item-content-bottom");
+
+    // Main Content Bottom p
+    var mainContentBottomp = document.createElement("p");
+    mainContentBottomp.innerText = message.message;
+
+    mainContentBottom.appendChild(mainContentBottomp);
+
+    if (message.count != 0) {
+        var mainContentBottomSpan = document.createElement("span");
+        mainContentBottomSpan.innerText = message.count;
+        mainContentBottom.appendChild(mainContentBottomSpan);
+    }
+
+    mainContent.appendChild(mainContentBottom);
+    main.appendChild(mainContent);
+    searchScreenBody.appendChild(main);
+});
+
+function search_message() {
+    let input = document.getElementById("searchInput").value;
+    input = input.toLowerCase();
+    let x = document.getElementsByClassName("search-screen-body-item");
+
+    for (i = 0; i < x.length; i++) {
+        if (!x[i].children[1].innerText.toLowerCase().includes(input)) {
+            x[i].style.display = "none";
+        } else {
+            x[i].style.display = "flex";
+        }
+    }
+}
+
+</script>
+</body>
+</html>

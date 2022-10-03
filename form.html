@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<script src="./validate.js"></script>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background: linear-gradient(176deg, #2a2727c9 43.95%, #2a2727fc 71.29%), url(/images/IN-en-20220425-popsignuptwoweeks-perspective_alpha_website_medium.jpg);
+    }
+
+    #regForm {
+        /* background-color: #00000029; */
+        margin: 100px auto;
+        font-family: Raleway;
+        padding: 40px;
+        width: 70%;
+        min-width: 300px;
+        color: white;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    input,select {
+        padding: 10px;
+        width: 100%;
+        font-size: 17px;
+        font-family: Raleway;
+        border: 1px solid #aaaaaa;
+        border-radius: 12px;
+    }
+.tab h2{
+    text-align: center;
+}
+    /* Mark input boxes that gets an error on validation: */
+    input.invalid ,select.invalid {
+        background-color: #ffdddd;
+    }
+
+    /* Hide all steps by default: */
+    .tab {
+        display: none;
+    }
+
+    button {
+        background-color: #1b8dda;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 17px;
+        font-family: Raleway;
+        cursor: pointer;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+    #prevBtn {
+        background-color: #bbbbbb;
+    }
+
+    /* Make circles that indicate the steps of the form: */
+    .step {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbbbbb;
+        border: none;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.5;
+    }
+
+    .step.active {
+        opacity: 1;
+    }
+
+    /* Mark the steps that are finished and valid: */
+    .step.finish {
+        background-color: #6d1dca;
+    }
+</style>
+
+<body>
+
+    <form id="regForm" action="/action_page.php">
+        <h1>Register:</h1>
+        <!-- One "tab" for each step in the form: -->
+        <div class="tab">
+            <h2>Personal Detail</h2>
+            <p> <p>Name</p>
+                <input placeholder="Full Name..." oninput="this.className = ''" name="funame"></p>
+            <p><p>Email</p>
+                <input type="email" placeholder="Email..." oninput="this.className = ''" name="email"></p>
+            <p><p>Mobile Number</p>
+                <input placeholder="Mobile Number..." oninput="this.className = ''" maxlength="10" name="pno"></p>
+            <p><p>Date Of Birth</p>
+                <input type="date" placeholder="Date of Birth..." oninput="this.className = ''" name="Dob"></p>
+            <p>Address Proof</p>
+            <p><input type="file" placeholder=" address proof..." oninput="this.className = ''" name="aproof"></p>
+        </div>
+        <div class="tab">
+             <h2 >Add Film</h2>
+            <p><input placeholder="Name of film..." oninput="this.className = ''" name="finame"></p>
+            <p>
+                <select name="catg" id="" oninput="this.className = ''">
+                    <option value="sel">select</option>
+                    <option value="fic">Fiction</option>
+                    <option value="non">Non- Fiction</option>
+                </select>
+
+            </p>
+            <p>
+                <select name="gener" id="" oninput="this.className = ''">
+                    <option value="action">Action</option>
+                    <option value="advocacy">Advocacy</option>
+                    <option value="anim">Animation</option>
+                    <option value="abiog">Autobiography</option>
+                    <option value="biog">biography</option>
+                    <option value="cartoon">Cartoon</option>
+                    <option value="comedy">Children</option>
+                    <option value="crime">crime</option>
+                    <option value="devo">Devotional</option>
+                    <option value="dra">Drama</option>
+                    <option value="exp">Experiment</option>
+                    <option value="fan">Fantasy</option>
+                    <option value="his">Historical</option>
+                    <option value="horr">Horror</option>
+                    <option value="lgbt">LGBT</option>
+                    <option value="muc">Music video</option>
+                    <option value="par">parody</option>
+                    <option value="rom">Romance</option>
+                    <option value="scfi">Sscience Fiction</option>
+                    <option value="ske">Sketch</option>
+                    <option value="soc">Social Relevent</option>
+                    <option value="spr">Spritual Relevant</option>
+                    <option value="sta">Stand UP</option>
+                    <option value="suom">Super Matural</option>
+                    <option value="sus">Suspence</option>
+                    <option value="Thr">Thriller</option>
+                    <option value="wome">Women Empowerment</option>
+                    <option value="oth">Other</option>
+                </select>
+            </p>
+            <p>
+                <select name="lan" id=""  oninput="this.className = ''">
+                <option value="hin">Hindi</option>
+                <option value="eng">English</option>
+                <option value="tel">Telgu</option>
+                <option value="tam">Tamil</option>
+                <option value="ote">Othere</option>
+                </select>
+            </p>
+            <p class="dur"><p>
+                <input type="number" placeholder="Enter minutes..." oninput="this.className = ''" name="min">
+                </p>
+                <p>
+                <input type="number" placeholder="Enter Seconds..." oninput="this.className = ''" name="sec">
+            </p>
+            </p>
+            <p>
+                <input  placeholder="Decription of Film..." oninput="this.className = ''" name="decf">
+            </p>
+            <p>
+                <input  placeholder="Link Of Video (Youtube,facebook,Instagram,other)..." oninput="this.className = ''" name="vidl">
+            </p>
+        </div>
+        <div class="tab">
+            <h2> Thumbnail</h2>
+            <p>Vertical Tumbnail</p>
+            <p><input type="file"  oninput="this.className = ''" name="vert"></p>
+            <p>Horizontal Tumbnail</p>
+            <p><input type="file"  oninput="this.className = ''" name="horit"></p>
+        </div>
+        <div class="tab">
+            <h2>Bank Details</h2>
+            <p><select name="loc" id="">
+                <option value="sel">select</option>
+                <option value="ind">India</option>
+                <option value="for">Foriegn</option>
+            </select></p>
+            <p><input placeholder="Bank Name..." oninput="this.className = ''" name="bname" type=""></p>
+            <p><input placeholder="IFSC Code..." oninput="this.className = ''" name="icode" type=""></p>
+            <p><input placeholder="MICR Code..." oninput="this.className = ''" name="mcode" type=""></p>
+            <p><input placeholder="Account Number..." oninput="this.className = ''" name="anum" type=""></p>
+            <p><input placeholder="Name of Account Holder..." oninput="this.className = ''" name="acname" type=""></p>
+        </div>
+        <div style="overflow:auto;">
+            <div style="float:right;">
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+            </div>
+        </div>
+        <!-- Circles which indicates the steps of the form: -->
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+        </div>
+    </form>
+
+
+    <script>
+        var currentTab = 0; // Current tab is set to be the first tab (0)
+        showTab(currentTab); // Display the current tab
+
+        function showTab(n) {
+            // This function will display the specified tab of the form...
+            var x = document.getElementsByClassName("tab");
+            x[n].style.display = "block";
+            //... and fix the Previous/Next buttons:
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (x.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+            //... and run a function that will display the correct step indicator:
+            fixStepIndicator(n)
+        }
+
+        function nextPrev(n) {
+            // This function will figure out which tab to display
+            var x = document.getElementsByClassName("tab");
+            // Exit the function if any field in the current tab is invalid:
+            if (n == 1 && !validateForm()) return false;
+            // Hide the current tab:
+            x[currentTab].style.display = "none";
+            // Increase or decrease the current tab by 1:
+            currentTab = currentTab + n;
+            // if you have reached the end of the form...
+            if (currentTab >= x.length) {
+                // ... the form gets submitted:
+                document.getElementById("regForm").submit();
+                return false;
+            }
+            // Otherwise, display the correct tab:
+            showTab(currentTab);
+        }
+
+        function validateForm() {
+            // This function deals with validation of the form fields
+            var x, y, i, valid = true;
+            x = document.getElementsByClassName("tab");
+            y = x[currentTab].getElementsByTagName("input");
+            // A loop that checks every input field in the current tab:
+            for (i = 0; i < y.length; i++) {
+                // If a field is empty...
+                if (y[i].value == "") {
+                    // add an "invalid" class to the field:
+                    y[i].className += " invalid";
+                    // and set the current valid status to false
+                    valid = false;
+                }
+            }
+            // If the valid status is true, mark the step as finished and valid:
+            if (valid) {
+                document.getElementsByClassName("step")[currentTab].className += " finish";
+            }
+            return valid; // return the valid status
+        }
+
+        function fixStepIndicator(n) {
+            // This function removes the "active" class of all steps...
+            var i, x = document.getElementsByClassName("step");
+            for (i = 0; i < x.length; i++) {
+                x[i].className = x[i].className.replace(" active", "");
+            }
+            //... and adds the "active" class on the current step:
+            x[n].className += " active";
+        }
+    </script>
+</body>
+
+</html>
